@@ -232,14 +232,44 @@ void blockchainWithCheaters(int difficulty, int nbofBlocks, int nbofBlockCheater
   freesParty(&newBlockchain, listofUsers, nbUsers);
 }
 
-void helpMessage(void) {
+void helpMessage(const char *program_name) {
 /// \brief Message d'affichage si utilisation de la balise -h (-help)
-  printf("Usage : bc DIFFICULTY BLOCKS NBMAXTX [CHEATERS]\n");
-  printf("Generates blockchain with monetary creation.\n");
-  printf("\n  -d difficulty\t\tHash difficulty to use\n");
-  printf("  -b blocks\t\tBlocks number to generate\n");
-  printf("  -t transactions\tMax transactions number for each bloc\n");
-  printf("  -c cheaters\t\tActivate or not cheaters : first int to choose block number, optionnal second int to choose transaction number\n");
+  fprintf(stderr,
+      "Usage: %s -d <difficulty> -b <blocks> -t <max_transactions> "
+      "[-c <block_number> [transaction_number]]\n\n"
+
+      "Description:\n"
+      "        Generate a blockchain with proof-of-work mining and\n"
+      "        monetary creation. Optional cheating scenarios can be\n"
+      "        enabled to validate blockchain integrity mechanisms.\n\n"
+
+      "Options:\n"
+
+      "  -d <difficulty>\n"
+      "        Hash difficulty used during the mining process.\n\n"
+
+      "  -b <blocks>\n"
+      "        Number of blocks to generate.\n\n"
+
+      "  -t <max_transactions>\n"
+      "        Maximum number of transactions per block.\n\n"
+
+      "  -c <block_number> [transaction_number]\n"
+      "        Enable a cheating scenario.\n"
+      "        The first value specifies the block to alter.\n"
+      "        An optional second value specifies the transaction\n"
+      "        to alter within the selected block.\n\n"
+
+      "Examples:\n"
+
+      "  %s -d 4 -b 20 -t 10\n"
+      "  %s -d 4 -b 20 -t 10 -c 5\n"
+      "  %s -d 4 -b 20 -t 10 -c 5 3\n",
+      program_name,
+      program_name,
+      program_name,
+      program_name
+  );
 }
 
 int main(int argc, char *argv[]) {
@@ -253,7 +283,7 @@ int main(int argc, char *argv[]) {
   int nbofBlocks=0, difficulty=0, nbofBlockCheater=0, nbofTxCheater=0, nbMaxofTx=0;
 
   if (has_h_beacon(argc, argv))
-    helpMessage();
+    helpMessage(argv[0]);
   else {
     if (!has_c_beacon(argc, argv) && argc>1) {
       for (int i=1; i<argc; i++) {
@@ -317,7 +347,7 @@ int main(int argc, char *argv[]) {
       blockchainWithCheaters(difficulty, nbofBlocks, nbofBlockCheater, nbMaxofTx, nbofTxCheater);
     }
     else {
-      helpMessage();
+      helpMessage(argv[0]);
     }
   }
   return OK;

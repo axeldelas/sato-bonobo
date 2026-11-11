@@ -69,7 +69,7 @@ char* getTimeStamp();
 void freesParty(blockchain *newBlockchain, BYTE **listofUsers, int nbUsers);
 blockchain inflationPhase(int nbofBlocks, blockchain blockchain, BYTE **listofUsers, int nbMaxofTx);
 blockchain noInflationPhase(int nbofBlocks, blockchain blockchain, BYTE **listofUsers, int nbMaxofTx);
-void helpMessage(void);
+void helpMessage(const char *program_name);
 
 /* --------------------- BLOCK --------------------- */
 doubleLinkedBlock initGenesisBlock(int difficulty);
