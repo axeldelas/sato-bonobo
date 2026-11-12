@@ -48,8 +48,9 @@ This project was developed by:
 
 - [Axel Delas](https://github.com/axeldelas)
 - [Amine Naim](https://github.com/aminenaim)
+- Mamadou Djibo
 
-as part of a two-person team.
+as part of a three-person team.
 
 ## :raised_hands: Credits
 
